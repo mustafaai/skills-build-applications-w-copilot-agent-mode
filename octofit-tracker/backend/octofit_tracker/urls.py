@@ -13,12 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from octofit_tracker import views
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
 
 router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -27,18 +26,8 @@ router.register(r'activities', views.ActivityViewSet)
 router.register(r'workouts', views.WorkoutViewSet)
 router.register(r'leaderboard', views.LeaderboardViewSet)
 
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'users': '/api/users/',
-        'teams': '/api/teams/',
-        'activities': '/api/activities/',
-        'workouts': '/api/workouts/',
-        'leaderboard': '/api/leaderboard/',
-    })
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', api_root, name='api_root'),
+    path('', views.api_root, name='api_root'),
     path('api/', include(router.urls)),
 ]

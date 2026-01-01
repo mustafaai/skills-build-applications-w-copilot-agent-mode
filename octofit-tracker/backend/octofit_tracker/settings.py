@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-_c+tv5w_*bluv6m*tr^lb!)=jy8j6=-=+^vu1-*fm=t1+(e$x@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'djongo',
     'allauth',
     'dj_rest_auth',
+    'octofit_tracker',
 ]
 
 MIDDLEWARE = [
@@ -76,9 +78,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'octofit_tracker.wsgi.application'
 
 
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
@@ -89,9 +91,22 @@ DATABASES = {
         },
     }
 }
+
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+CORS_EXPOSE_HEADERS = ['Content-Disposition']
 
 # Django REST Framework settings (optional, can be extended as needed)
 REST_FRAMEWORK = {

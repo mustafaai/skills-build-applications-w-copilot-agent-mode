@@ -1,3 +1,4 @@
+
 from django.contrib import admin
 from .models import User, Team, Activity, Workout, Leaderboard
 
@@ -8,7 +9,7 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'created_at')
-    filter_horizontal = ('members',)
+    # filter_horizontal is not supported for ArrayReferenceField in djongo
 
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
